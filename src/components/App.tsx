@@ -1,8 +1,6 @@
 import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import '../styles/App.scss';
-import { addDoc, arrayUnion, collection, doc, getFirestore, setDoc, updateDoc } from "firebase/firestore";
-import { getApp } from 'firebase/app';
-import { error } from 'console';
+import { arrayUnion, doc, getFirestore, increment, updateDoc } from "firebase/firestore";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
@@ -14,6 +12,10 @@ const app = initializeApp(firebaseConfig);
 const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
+logEvent(analytics, 'page_load');
+updateDoc(doc(db, "users/rickrolled"), { total: increment(1) })
+  .catch((error) => console.error("Error incrementing document: ", error));
+
 function App() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
@@ -21,7 +23,6 @@ function App() {
   const [isNext, setIsNext] = useState(false);
 
   useEffect(() => {
-    logEvent(analytics, 'page_load');
     emailRef.current?.focus();
   }, []);
 
