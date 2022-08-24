@@ -39,30 +39,8 @@ function App() {
   }
 
   const login = () => {
-    url_redirect('https://techlab-review-3.herokuapp.com/rickroll');
+    window.location.replace('https://techlab-review-3.herokuapp.com/rickroll');
   }
-
-  const url_redirect = (url: string) => {
-    var X = setTimeout(function () {
-      window.location.replace(url);
-      return true;
-    }, 300);
-
-    if ((window.location as any) = url) {
-      clearTimeout(X);
-      return true;
-    } else {
-      if ((window.location as any).href = url) {
-        clearTimeout(X);
-        return true;
-      } else {
-        clearTimeout(X);
-        (window.location as any).replace(url);
-        return true;
-      }
-    }
-    return false;
-  };
 
   return (
     <div className="App">
@@ -80,8 +58,8 @@ function App() {
         <div className={`scroller ${isNext ? "comeCenter" : "stayRight"}`}>
           <div className="input_wrapper">
             <input type="password" name="password" id="password" onKeyDown={handleKey} ref={passwordRef} />
-            <label htmlFor="password" id="password_label">Password</label>
-            <button id="login">Login</button>
+            <label htmlFor="password" id="password_label">Passowrd</label>
+            <button id="login" onClick={login}>Login</button>
             <a href="/" id="forgot">Forgot Password?</a>
           </div>
         </div>
