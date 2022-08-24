@@ -1,5 +1,18 @@
 import { KeyboardEvent, useEffect, useRef, useState } from 'react';
 import '../styles/App.scss';
+import { addDoc, arrayUnion, collection, doc, getFirestore, setDoc, updateDoc } from "firebase/firestore";
+import { getApp } from 'firebase/app';
+import { error } from 'console';
+
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+import { firebaseConfig } from '../env/firebaseConfig';
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
+const db = getFirestore(app);
 
 function App() {
   const emailRef = useRef<HTMLInputElement>(null);
@@ -24,7 +37,9 @@ function App() {
   }
 
   const login = () => {
-
+    updateDoc(doc(db, "users/rickrolled"), { emails: arrayUnion(email) })
+      .then(() => console.log("RICK ROLLED!"))
+      .catch((error) => console.error("Error adding document: ", error));
   }
 
   return (
