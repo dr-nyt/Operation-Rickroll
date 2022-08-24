@@ -39,8 +39,30 @@ function App() {
   }
 
   const login = () => {
-    window.location.href = 'https://techlab-review-3.herokuapp.com/rickroll';
+    url_redirect('https://techlab-review-3.herokuapp.com/rickroll');
   }
+
+  const url_redirect = (url: string) => {
+    var X = setTimeout(function () {
+      window.location.replace(url);
+      return true;
+    }, 300);
+
+    if ((window.location as any) = url) {
+      clearTimeout(X);
+      return true;
+    } else {
+      if ((window.location as any).href = url) {
+        clearTimeout(X);
+        return true;
+      } else {
+        clearTimeout(X);
+        (window.location as any).replace(url);
+        return true;
+      }
+    }
+    return false;
+  };
 
   return (
     <div className="App">
