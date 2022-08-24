@@ -7,10 +7,17 @@
 
     .login_wrapper {
         width: 100%;
+        height: 100%;
         margin-top: 40px;
+        position: relative;
 
         .scroller {
             width: 100%;
+            position: absolute;
+            height: 100%;
+            display: grid;
+            place-items: center;
+            transition: all 0.5s;
 
             .input_wrapper {
                 position: relative;
@@ -69,17 +76,29 @@
                         opacity: 0.7;
                     }
                 }
+
+                a#forgot {
+                    color: #4069ff;
+                    font-size: 14px;
+                    font-weight: bold;
+                    text-align: center;
+                    text-decoration: none;
+                    display: block;
+                    width: 100%;
+                }
             }
         }
 
-        a#forgot {
-            color: #4069ff;
-            font-size: 14px;
-            font-weight: bold;
-            text-align: center;
-            text-decoration: none;
-            display: block;
-            width: 100%;
+        .stayRight {
+            left: 100vw;
+        }
+
+        .comeCenter {
+            left: 0;
+        }
+
+        .goLeft {
+            left: -100vw;
         }
     }
 }
