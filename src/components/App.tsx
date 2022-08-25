@@ -13,14 +13,22 @@ const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
 logEvent(analytics, 'page_load');
-updateDoc(doc(db, "users/rickrolled"), { total: increment(1) })
-  .catch((error) => console.error("Error incrementing document: ", error));
+if (localStorage.getItem('rickrolled') !== 'true') {
+  updateDoc(doc(db, "users/rickrolled"), { total: increment(1) })
+    .catch((error) => console.error("Error incrementing document: ", error));
+  console.log("rickrolling");
+} else {
+  console.log("Already rickrolled");
+}
+
+localStorage.setItem("rickrolled", "true");
 
 function App() {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const [email, setEmail] = useState('');
   const [isNext, setIsNext] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     emailRef.current?.focus();
@@ -41,6 +49,7 @@ function App() {
   }
 
   const login = () => {
+    setIsLoading(true);
     window.location.replace('https://techlab-review-3.herokuapp.com/rickroll');
   }
 
@@ -61,7 +70,7 @@ function App() {
           <div className="input_wrapper">
             <input type="password" name="password" id="password" onKeyDown={handleKey} ref={passwordRef} />
             <label htmlFor="password" id="password_label">Passowrd</label>
-            <button id="login" onClick={login}>Login</button>
+            <button id="login" onClick={login} disabled={isLoading}>Login</button>
             <a href="/" id="forgot">Forgot Password?</a>
           </div>
         </div>
