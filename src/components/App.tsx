@@ -69,7 +69,7 @@ function App() {
         <div className={`scroller ${isNext ? "comeCenter" : "stayRight"}`}>
           <div className="input_wrapper">
             <input type="password" name="password" id="password" onKeyDown={handleKey} ref={passwordRef} />
-            <label htmlFor="password" id="password_label">Passowrd</label>
+            <label htmlFor="password" id="password_label">Password</label>
             <button id="login" onClick={login} disabled={isLoading}>Login</button>
             <a href="/" id="forgot">Forgot Password?</a>
           </div>
